@@ -1,0 +1,41 @@
+
+.bg{
+    background-image: url('../../../assets/background/htc-3.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: brightness(80%);
+
+}
+
+h2{
+    color: blueviolet;
+    text-decoration: underline;
+}
+
+.pt-8{
+    padding-top: 8%;
+}
+
+.mt-8{
+    padding-top: 8%;
+}
+
+a{
+    color: black;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+button{
+    width: 20%;
+}
+
+label{
+    font-size: 24px;
+    color: black;
+    font-weight: 500;
+}
+
+.centre{
+    text-align: center;
+}

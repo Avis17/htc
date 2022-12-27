@@ -1,0 +1,23 @@
+<div class="bg" [ngStyle]="{'width' : (getScreenWidth)+'px', 'height' : (getScreenHeight-30)+'px'}">
+    <div class="centre mt-8">
+        <h2>Hi-Tech City Association</h2>
+    </div>
+    <div class="container pt-8">
+        <div class="mt-3">
+            <label>Username</label>
+            <input type="text" class="form-control" [(ngModel)]="username">
+        </div>
+        <div class="mt-3">
+            <label>Password</label>
+            <input type="password" class="form-control" [(ngModel)]="password">
+        </div>
+        <div class="mt-3">
+            <button (click)="onLogin()" #tooltip="matTooltip" matTooltipPosition="below"
+            matTooltipHideDelay="100000" mat-raised-button
+            matTooltip="Please enter the valid credentails" [disabled]="username == '' || password == ''" class="btn btn-primary">Login</button>
+        </div>
+        <div class="mt-3">
+            <a routerLink="/register">new user? click to Register!</a>
+        </div>
+    </div>
+</div>
