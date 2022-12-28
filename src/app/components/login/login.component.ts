@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
         })
         return
       }
+      delete res.user.password
       sessionStorage.setItem('user', JSON.stringify(res.user))
       localStorage.setItem('createduser', 'true');
       this.router.navigate(['/dashboard/members'])

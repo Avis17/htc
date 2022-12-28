@@ -15,6 +15,17 @@ export class UserService {
     return this.http.post(this.url+'getusers', {collectionName :'members', reqdata : {}});
   }
 
+  updateUser(userDetails:any){
+    let _id = userDetails._id;
+    delete userDetails._id;
+    return this.http.post(this.url+'update-user', {collectionName :'members', data : userDetails, query : _id});
+  }
+
+  deleteUser(user:any){
+    let _id = user._id;
+    return this.http.post(this.url+'delete-user', {collectionName :'members', query : _id});
+  }
+
 }
 
 

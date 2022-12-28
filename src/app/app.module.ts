@@ -17,6 +17,9 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { SearchPipe } from './pipes/search.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,10 @@ import { SearchPipe } from './pipes/search.pipe';
     FormsModule,
     MatTooltipModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule,
+    MatExpansionModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

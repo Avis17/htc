@@ -6,7 +6,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>S No</th>
+                    <!-- <th>S No</th> -->
                     <th>Flat No</th>
                     <th>Name</th>
                     <th>Email</th>
@@ -16,25 +16,80 @@
                     <th>Blood Group</th>
                     <th>Type Of Flat</th>
                     <th>Use</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let user Of users | search : searchText : ['flatNo', 'name', 'email', 'phone', 'alternatePhone', 'bloodGroup', 'typeOfFlat', 'typeOfUse']; let i=index">
-                    <td>{{i+1}}</td>
-                    <td>{{user.flatNo}}</td>
-                    <td>{{user.name}}</td>
-                    <td>{{user.email}}</td>
+                <tr *ngFor="let user Of users | search : searchText : ['flatNo', 'name', 'email', 'phone', 'alternatePhone', 'bloodGroup', 'typeOfFlat', 'typeOfUse'] | paginate: { itemsPerPage: 5, currentPage: p}; let i=index">
+                    <!-- <td>{{i+1}}</td> -->
+                    <td>
+                        <label *ngIf="!user.isEdit">{{user.flatNo}}</label>
+                        <input style="width: 120px;" *ngIf="user.isEdit" type="number" class="form-control" [(ngModel)]="user.flatNo">
+                    </td>
+                    <td>
+                        <label *ngIf="!user.isEdit">{{user.name}}</label>
+                        <input style="width: 180px;" *ngIf="user.isEdit" type="text" class="form-control" [(ngModel)]="user.name">
+                    </td>
+                    <td>
+                        <label *ngIf="!user.isEdit">{{user.email}}</label>
+                        <input style="width: 180px;" *ngIf="user.isEdit" type="text" class="form-control" [(ngModel)]="user.email">
+                    </td>
                     <td>
                         <img *ngIf="user.gender == 'Male'" src="../../../assets/icons/man.svg" width="32px" height="24px">
                         <img *ngIf="user.gender == 'Female'" src="../../../assets/icons/woman.svg" width="32px" height="24px">
                     </td>
-                    <td>{{user.phone}}</td>
-                    <td>{{user.alternatePhone}}</td>
-                    <td>{{user.bloodGroup}}</td>
-                    <td>{{user.typeOfFlat}}</td>
-                    <td>{{user.typeOfUse}}</td>
+                    <td>
+                        <label *ngIf="!user.isEdit">{{user.phone}}</label>
+                        <input style="width: 180px;" *ngIf="user.isEdit" type="number" class="form-control" [(ngModel)]="user.phone">
+                    </td>
+                    <td>
+                        <label *ngIf="!user.isEdit">{{user.alternatePhone}}</label>
+                        <input  style="width: 180px;"*ngIf="user.isEdit" type="number" class="form-control" [(ngModel)]="user.alternatePhone">
+                    </td>
+                    <td>
+                        <label *ngIf="!user.isEdit">{{user.bloodGroup}}</label>
+                        <select style="width: 180px;" *ngIf="user.isEdit" [(ngModel)]="user.bloodGroup" class="form-control">
+                            <option >-- Blood Group --</option>
+                            <option>A Positive</option>
+                            <option>A Negative</option>
+                            <option>A Unknown</option>
+                            <option>B Positive</option>
+                            <option>B Negative</option>
+                            <option>B Unknown</option>
+                            <option>AB Positive</option>
+                            <option>AB Negative</option>
+                            <option>AB Unknown</option>
+                            <option>O Positive</option>
+                            <option>O Negative</option>
+                            <option>O Unknown</option>
+                            <option>Unknown</option>
+                        </select>                    
+                    </td>
+                    <td>
+                        <label *ngIf="!user.isEdit">{{user.typeOfFlat}}</label>
+                        <div *ngIf="user.isEdit">
+                            <input  [(ngModel)]="user.typeOfFlat" type="radio" value="1bhk" name="flat"> 1 BHK &nbsp;
+                            <input [(ngModel)]="user.typeOfFlat" type="radio" value="2bhk" name="flat"> 2 BHK
+                        </div>
+                    </td>
+                    <td>
+                        <label *ngIf="!user.isEdit">{{user.typeOfUse}}</label>
+                        <div *ngIf="user.isEdit">
+                            <input  [(ngModel)]="user.typeOfUse" type="radio" value="own" name="use"> Own Use &nbsp;
+                            <input  [(ngModel)]="user.typeOfUse" type="radio" value="rental" name="use"> Rental
+                        </div>    
+                    </td>
+                    <td *ngIf="adminAccess">
+                        <button *ngIf="!user.isEdit" class="btn btn-warning" (click)="onEdit(user)">Edit</button>
+                        <button *ngIf="!user.isEdit" class="btn btn-danger" (click)="onDelete(user)">Delete</button>
+                        <button *ngIf="user.isEdit" class="btn btn-info" (click)="onCancel(user)">Cancel</button>
+                        <button *ngIf="user.isEdit" class="btn btn-success" (click)="onSave(user)">Save</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
+        <div style="float: right;" *ngIf="users.length > 0">
+            <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+        </div>
     </div>
 </div>
