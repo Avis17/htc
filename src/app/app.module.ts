@@ -13,7 +13,11 @@ import { RegisterComponent } from './components/register/register.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MembersComponent } from './components/members/members.component';
-import { ProfileComponent } from './components/profile/profile.component'
+import { ProfileComponent } from './components/profile/profile.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { SearchPipe } from './pipes/search.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +26,10 @@ import { ProfileComponent } from './components/profile/profile.component'
     ChangePasswordComponent,
     DashboardComponent,
     MembersComponent,
-    ProfileComponent
+    ProfileComponent,
+    SidebarComponent,
+    ToolbarComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

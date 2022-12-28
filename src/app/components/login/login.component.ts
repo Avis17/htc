@@ -14,13 +14,14 @@ export class LoginComponent implements OnInit {
   public getScreenHeight: any;
   public username : any = '';
   public password : any = '';
-
+  public createdUser :any = false
   constructor(private loginService:LoginService, private router:Router) { }
 
   ngOnInit(): void {
       this.getScreenWidth = window.innerWidth;
       this.getScreenHeight = window.innerHeight;
       console.log(this.getScreenWidth, this.getScreenHeight)
+      this.createdUser = localStorage.getItem('createduser')
   }
 
   @HostListener('window:resize', ['$event'])
@@ -49,8 +50,10 @@ export class LoginComponent implements OnInit {
         })
         return
       }
-      this.router.navigate(['/dashboard'])
-    }, (err)=>{
+      sessionStorage.setItem('user', JSON.stringify(res.user))
+      localStorage.setItem('createduser', 'true');
+      this.router.navigate(['/dashboard/members'])
+    }, (err:any)=>{
       Swal.fire({
         icon: 'error',
         title: 'Oops...',

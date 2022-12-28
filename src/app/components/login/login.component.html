@@ -12,11 +12,10 @@
             <input type="password" class="form-control" [(ngModel)]="password">
         </div>
         <div class="mt-3">
-            <button (click)="onLogin()" #tooltip="matTooltip" matTooltipPosition="below"
-            matTooltipHideDelay="100000" mat-raised-button
-            matTooltip="Please enter the valid credentails" [disabled]="username == '' || password == ''" class="btn btn-primary">Login</button>
+            <button (click)="onLogin()"
+             [disabled]="username == '' || password == ''" class="btn btn-primary">Login</button>
         </div>
-        <div class="mt-3">
+        <div class="mt-3" *ngIf="!createdUser">
             <a routerLink="/register">new user? click to Register!</a>
         </div>
     </div>

@@ -1,1 +1,40 @@
-<p>members works!</p>
+<div class="container mt-5">
+    <div class="end">
+        <input [(ngModel)]="searchText" type="text" class="form-control" placeholder="search here..">
+    </div>
+    <div class="table-responsive mt-5">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>S No</th>
+                    <th>Flat No</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Phone</th>
+                    <th>Alternate Phone Number</th>
+                    <th>Blood Group</th>
+                    <th>Type Of Flat</th>
+                    <th>Use</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user Of users | search : searchText : ['flatNo', 'name', 'email', 'phone', 'alternatePhone', 'bloodGroup', 'typeOfFlat', 'typeOfUse']; let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{user.flatNo}}</td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>
+                        <img *ngIf="user.gender == 'Male'" src="../../../assets/icons/man.svg" width="32px" height="24px">
+                        <img *ngIf="user.gender == 'Female'" src="../../../assets/icons/woman.svg" width="32px" height="24px">
+                    </td>
+                    <td>{{user.phone}}</td>
+                    <td>{{user.alternatePhone}}</td>
+                    <td>{{user.bloodGroup}}</td>
+                    <td>{{user.typeOfFlat}}</td>
+                    <td>{{user.typeOfUse}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

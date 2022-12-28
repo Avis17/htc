@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
   }
 
   userDetails = {
+    flatNo : '',
     name: '',
     username : '',
     email : '',
@@ -24,15 +25,15 @@ export class RegisterComponent implements OnInit {
     typeOfFlat : '',
     typeOfUse : '',
     gender : '',
-    bloodGroup : '',
+    bloodGroup : '-- Blood Group --',
     password : ''
   }
 
   onValidate()
   {
-    if(this.userDetails.name != '' && this.userDetails.email != '' && this.userDetails.phone != '' &&
+    if(this.userDetails.flatNo != '' && this.userDetails.name != '' && this.userDetails.email != '' && this.userDetails.phone != '' &&
     this.userDetails.alternatePhone != '' && this.userDetails.password != '' && this.userDetails.typeOfFlat != ''
-    && this.userDetails.typeOfUse != '' && this.userDetails.gender != '', this.userDetails.bloodGroup != ''){
+    && this.userDetails.typeOfUse != '' && this.userDetails.gender != '' && this.userDetails.bloodGroup != ''){
       return false
     }
     return true
@@ -44,6 +45,7 @@ export class RegisterComponent implements OnInit {
       collectionName : 'members',
       reqdata : {
         ...this.userDetails,
+        createdAt : new Date(),
         username : this.userDetails.email,
       }
     }).subscribe((res:any)=>{
