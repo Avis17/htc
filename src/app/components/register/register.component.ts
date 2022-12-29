@@ -41,14 +41,7 @@ export class RegisterComponent implements OnInit {
 
   onRegister()
   {
-    this.loginService.register({
-      collectionName : 'members',
-      reqdata : {
-        ...this.userDetails,
-        createdAt : new Date(),
-        username : this.userDetails.email,
-      }
-    }).subscribe((res:any)=>{
+    this.loginService.register(this.userDetails).subscribe((res:any)=>{
       if(res.status != 200)
       {
         Swal.fire({

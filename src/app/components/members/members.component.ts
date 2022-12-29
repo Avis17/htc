@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from 'src/app/services/shared.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 
@@ -9,24 +10,21 @@ import Swal from 'sweetalert2';
 })
 export class MembersComponent implements OnInit {
 
-  constructor(private userService:UserService) { }
+  constructor(private userService:UserService, private sharedService:SharedService) { }
 
   ngOnInit(): void {
-    let user = JSON.parse(sessionStorage.getItem('user') || '');
-    if(user)
-    {
-      this.adminAccess = user.isAdmin ? true : false
-    }
+    this.adminAccess = this.sharedService.isAdminCheck();
     this.getUsers();
   }
 
+  toggle:boolean = true
   users:any = []
   searchText :any = ''
   p: number = 1;
-  adminAccess = false;
+  adminAccess:any;
   getUsers()
   {
-    this.userService.getUsers().subscribe((res:any)=>{
+    this.userService.getUsers('members',{}).subscribe((res:any)=>{
       if(res.status != 200)
       {
         return
@@ -37,6 +35,32 @@ export class MembersComponent implements OnInit {
       })
       this.users = res.data;
     })
+  }
+
+  onClickSort(sortType:any){
+    this.toggle = !this.toggle
+    if(this.toggle)
+    {
+      this.users.sort((x:any, y:any) => {
+        if (x[sortType] < y[sortType]) {
+          return -1;
+        }
+        if (x[sortType] > y[sortType]) {
+          return 1;
+        }
+        return 0;
+      })
+    }else{
+      this.users.sort((x:any, y:any) => {
+        if (x[sortType] < y[sortType]) {
+          return 1;
+        }
+        if (x[sortType] > y[sortType]) {
+          return -1;
+        }
+        return 0;
+      })
+    }
   }
 
   onPageChange(event: any) {
@@ -57,7 +81,7 @@ export class MembersComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.userService.deleteUser(user).subscribe((res:any)=>{
+        this.userService.deleteUser('members', user).subscribe((res:any)=>{
           if(res.status != 200)
           {
             Swal.fire({
@@ -83,7 +107,7 @@ export class MembersComponent implements OnInit {
   }
   onSave(user:any){
     user.isEdit = !user.isEdit
-    this.userService.updateUser(user).subscribe((res:any)=>{
+    this.userService.updateUser('members', user).subscribe((res:any)=>{
       if(res.status != 200)
       {
         Swal.fire({

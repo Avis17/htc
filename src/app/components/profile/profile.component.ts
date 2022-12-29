@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 
@@ -9,15 +10,22 @@ import Swal from 'sweetalert2';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private userService:UserService) { }
+  constructor(private userService:UserService, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.userDetails = JSON.parse(sessionStorage.getItem('user') || '');
+    this.route.params.subscribe((params:any) => {
+      this.email = params['email'];
+      if(this.email)
+      {
+        this.getUserDetails(this.email)
+      }
+    });
+    // this.userDetails = JSON.parse(sessionStorage.getItem('user') || '');
   }
 
   userDetails : any = {}
   isEdit = false;
-
+  email:any;
   onEdit()
   {
     this.isEdit = true;
@@ -26,7 +34,7 @@ export class ProfileComponent implements OnInit {
   onSave()
   {
     this.isEdit = false;
-    this.userService.updateUser(this.userDetails).subscribe((res:any)=>{
+    this.userService.updateUser('members', this.userDetails).subscribe((res:any)=>{
       if(res.status != 200)
       {
         Swal.fire({
@@ -40,6 +48,17 @@ export class ProfileComponent implements OnInit {
         icon: 'success',
         text: 'User details updated successfully.'
       })
+    })
+  }
+
+  getUserDetails(email:any)
+  {
+    this.userService.getUsers('members',{"email" : email}).subscribe((res:any)=>{
+      console.log(res)
+      if(res.status == 200)
+      {
+        this.userDetails = res.data[0];
+      }
     })
   }
 

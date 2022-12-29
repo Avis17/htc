@@ -19,4 +19,14 @@ export class SharedService {
     console.log(this._toggleClicked)
     return this._toggleClicked.next(value)
   }
+
+  isAdminCheck()
+  {
+    let userDetails = JSON.parse(sessionStorage.getItem('user') || '');
+    if(userDetails)
+    {
+      return userDetails.isAdmin ? userDetails.isAdmin : undefined
+    }
+    return undefined
+  }
 }

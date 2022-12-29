@@ -14,7 +14,9 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.shraedService.getToggleClicked().subscribe((res:any)=>{
       this.isToggle = res;
-    })
+    });
+    this.userDetails = JSON.parse(sessionStorage.getItem('user') || '');
   }
 
+  userDetails : any;
 }

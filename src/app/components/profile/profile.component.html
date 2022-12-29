@@ -1,114 +1,124 @@
 <div class="container mt-5">
-    <!-- <label>No data Available!, work in progress.</label> -->
-    <div class="text-end mb-3">
-        <button *ngIf="!isEdit" class="btn btn-warning" (click)="onEdit()">Edit Details</button>
-        <button *ngIf="isEdit" class="btn btn-success" (click)="onSave()">Save Details</button>
-    </div>
-    <mat-accordion class="example-headers-align mt-5" multi>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title class="bold-700">
-              Personal data
-            </mat-panel-title>
-            <mat-panel-description class="text-end">
-              <mat-icon>account_circle</mat-icon>
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-      
-         <div class="row">
-            <div class="col">
-                <h3>Name</h3>
-                <label *ngIf="!isEdit">{{userDetails.name}}</label>
-                <input *ngIf="isEdit" type="text" class="form-control" [(ngModel)]="userDetails.name">
-            </div>
-            <div class="col">
-                <h3>Email - (USERNAME)</h3>
-                <label *ngIf="!isEdit">{{userDetails.email}}</label>
-                <input *ngIf="isEdit" type="text" class="form-control" [(ngModel)]="userDetails.email">
-            </div>
-         </div>
-         <div class="row">
-            <div class="col">
-                <h3>Gender</h3>
-                <label *ngIf="!isEdit">{{userDetails.gender}}</label>
-                <div *ngIf="isEdit">
-                  <input [(ngModel)]="userDetails.gender" type="radio" value="Male" name="gender"> Male &nbsp;
-                  <input [(ngModel)]="userDetails.gender" type="radio" value="Female" name="gender"> Female      
-                </div>
-            </div>
-            <div class="col">
-                <h3>Blood Group</h3>
-                <label *ngIf="!isEdit">{{userDetails.bloodGroup}}</label>
-                <select *ngIf="isEdit" [(ngModel)]="userDetails.bloodGroup" class="form-control">
-                    <option >-- Blood Group --</option>
-                    <option>A Positive</option>
-                    <option>A Negative</option>
-                    <option>A Unknown</option>
-                    <option>B Positive</option>
-                    <option>B Negative</option>
-                    <option>B Unknown</option>
-                    <option>AB Positive</option>
-                    <option>AB Negative</option>
-                    <option>AB Unknown</option>
-                    <option>O Positive</option>
-                    <option>O Negative</option>
-                    <option>O Unknown</option>
-                    <option>Unknown</option>
-                </select>
-            </div>
-         </div>
-        </mat-expansion-panel>
-        <mat-expansion-panel>
+    <label *ngIf="!userDetails">No data Available!</label>
+    <div *ngIf="userDetails">
+      <div class="text-end mb-3">
+        <button *ngIf="!isEdit" class="btn btn-info" (click)="onEdit()">Edit Details</button>
+        <button *ngIf="isEdit" class="btn btn-success" (click)="onSave()">Save Details</button> &nbsp;
+        <button *ngIf="isEdit" class="btn btn-warning" (click)="isEdit = !isEdit">Cancel</button>
+      </div>
+      <mat-accordion class="example-headers-align mt-5" multi>
+          <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title class="bold-700">
-                Contact Details
+                Personal data
               </mat-panel-title>
               <mat-panel-description class="text-end">
-                <mat-icon>phone</mat-icon>
+                <mat-icon>account_circle</mat-icon>
               </mat-panel-description>
             </mat-expansion-panel-header>
         
-           <div class="row">
+          <div class="row">
               <div class="col">
-                  <h3>Phone (Whatsapp)</h3>
-                  <label *ngIf="!isEdit">{{userDetails.phone}}</label>
-                  <input *ngIf="isEdit" type="text" class="form-control" [(ngModel)]="userDetails.phone">
+                  <h3>Name</h3>
+                  <label *ngIf="!isEdit">{{userDetails.name}}</label>
+                  <input *ngIf="isEdit" type="text" class="form-control" [(ngModel)]="userDetails.name">
               </div>
               <div class="col">
-                  <h3>Alternate Phone</h3>
-                  <label *ngIf="!isEdit">{{userDetails.alternatePhone}}</label>
-                  <input *ngIf="isEdit" type="text" class="form-control" [(ngModel)]="userDetails.alternatePhone">
+                  <h3>Username</h3>
+                  <label *ngIf="!isEdit">{{userDetails.email}}</label>
+                  <input *ngIf="isEdit" type="text" class="form-control" [(ngModel)]="userDetails.email">
               </div>
-           </div>
-        </mat-expansion-panel>
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title class="bold-700">
-                Flat Details
-              </mat-panel-title>
-              <mat-panel-description class="text-end">
-                <mat-icon>home</mat-icon>
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-        
-           <div class="row">
+          </div>
+          <div class="row">
               <div class="col">
-                  <h3>Type Of Flat</h3>
-                  <label *ngIf="!isEdit">{{userDetails.typeOfFlat}}</label>
+                  <h3>Gender</h3>
+                  <label *ngIf="!isEdit">{{userDetails.gender}}</label>
                   <div *ngIf="isEdit">
-                    <input [(ngModel)]="userDetails.typeOfFlat" type="radio" value="1bhk" name="flat"> 1 BHK &nbsp;
-                    <input [(ngModel)]="userDetails.typeOfFlat" type="radio" value="2bhk" name="flat"> 2 BHK
+                    <input [(ngModel)]="userDetails.gender" type="radio" value="Male" name="gender"> Male &nbsp;
+                    <input [(ngModel)]="userDetails.gender" type="radio" value="Female" name="gender"> Female      
                   </div>
-                </div>
+              </div>
               <div class="col">
-                  <h3>Use of Flat</h3>
-                  <label *ngIf="!isEdit">{{userDetails.typeOfUse}}</label>
-                    <div *ngIf="isEdit">
-                        <input [(ngModel)]="userDetails.typeOfUse" type="radio" value="own" name="use"> Own Use &nbsp;
-                         <input [(ngModel)]="userDetails.typeOfUse" type="radio" value="rental" name="use"> Rental
-                    </div>
+                  <h3>Blood Group</h3>
+                  <label *ngIf="!isEdit">{{userDetails.bloodGroup}}</label>
+                  <select *ngIf="isEdit" [(ngModel)]="userDetails.bloodGroup" class="form-control">
+                      <option >-- Blood Group --</option>
+                      <option>A Positive</option>
+                      <option>A Negative</option>
+                      <option>A Unknown</option>
+                      <option>B Positive</option>
+                      <option>B Negative</option>
+                      <option>B Unknown</option>
+                      <option>AB Positive</option>
+                      <option>AB Negative</option>
+                      <option>AB Unknown</option>
+                      <option>O Positive</option>
+                      <option>O Negative</option>
+                      <option>O Unknown</option>
+                      <option>Unknown</option>
+                  </select>
+              </div>
+          </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title class="bold-700">
+                  Contact Details
+                </mat-panel-title>
+                <mat-panel-description class="text-end">
+                  <mat-icon>phone</mat-icon>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+          
+            <div class="row">
+                <div class="col">
+                    <h3>Phone (Whatsapp)</h3>
+                    <label *ngIf="!isEdit">{{userDetails.phone}}</label>
+                    <input *ngIf="isEdit" type="text" class="form-control" [(ngModel)]="userDetails.phone">
                 </div>
-           </div>
-        </mat-expansion-panel>
+                <div class="col">
+                    <h3>Alternate Phone</h3>
+                    <label *ngIf="!isEdit">{{userDetails.alternatePhone}}</label>
+                    <input *ngIf="isEdit" type="text" class="form-control" [(ngModel)]="userDetails.alternatePhone">
+                </div>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title class="bold-700">
+                  Flat Details
+                </mat-panel-title>
+                <mat-panel-description class="text-end">
+                  <mat-icon>home</mat-icon>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+          
+              <div class="row">
+                <div class="col">
+                  <h3>Flat No</h3>
+                  <label *ngIf="!isEdit">{{userDetails.flatNo}}</label>
+                  <input *ngIf="isEdit" type="number" class="form-control" [(ngModel)]="userDetails.flatNo">
+                </div>
+              </div>
+            <div class="row mt-2">
+                <div class="col">
+                    <h3>Type Of Flat</h3>
+                    <label *ngIf="!isEdit">{{userDetails.typeOfFlat}}</label>
+                    <div *ngIf="isEdit">
+                      <input [(ngModel)]="userDetails.typeOfFlat" type="radio" value="1bhk" name="flat"> 1 BHK &nbsp;
+                      <input [(ngModel)]="userDetails.typeOfFlat" type="radio" value="2bhk" name="flat"> 2 BHK
+                    </div>
+                  </div>
+                <div class="col">
+                    <h3>Use of Flat</h3>
+                    <label *ngIf="!isEdit">{{userDetails.typeOfUse}}</label>
+                      <div *ngIf="isEdit">
+                          <input [(ngModel)]="userDetails.typeOfUse" type="radio" value="own" name="use"> Own Use &nbsp;
+                          <input [(ngModel)]="userDetails.typeOfUse" type="radio" value="rental" name="use"> Rental
+                      </div>
+                  </div>
+            </div>
+          </mat-expansion-panel>
       </mat-accordion>
+    </div>
 </div>

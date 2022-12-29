@@ -1,5 +1,13 @@
 
 .end{
-    text-align: end;
-    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.width-60{
+    width: 60%;
+}
+
+.pointer{
+    cursor: pointer;
 }

@@ -23,9 +23,20 @@
     <hr class="sidebar-divider">
 
     <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="/dashboard/profile">
+        <a class="nav-link" routerLinkActive="active" [routerLink]="[ '/dashboard/profile/', userDetails.email]">
             <img src="../../../assets/icons/profile.png" width="24px"> &nbsp;
             <span>Profile</span></a>
     </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" routerLink="/dashboard/complaints">
+            <img src="../../../assets/icons/complaint.png" width="24px"> &nbsp;
+            <span>Complaints</span></a>
+    </li>
+    <!-- Divider -->
+    <hr class="sidebar-divider">
 </ul>
 <!-- End of Sidebar -->

@@ -20,6 +20,7 @@ import { SearchPipe } from './pipes/search.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
+import { ComplaintsComponent } from './components/complaints/complaints.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {MatIconModule} from '@angular/material/icon';
     ProfileComponent,
     SidebarComponent,
     ToolbarComponent,
-    SearchPipe
+    SearchPipe,
+    ComplaintsComponent
   ],
   imports: [
     BrowserModule,

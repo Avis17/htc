@@ -18,7 +18,15 @@ export class LoginService {
 
   register(user:any)
   {
-    return this.http.post(this.url+'register', user);
+    return this.http.post(this.url+'register', {
+      collectionName : 'members',
+      reqdata : {
+        ...user,
+        createdAt : new Date(),
+        username : user.email,
+        password : user.password.trim()
+      }
+    });
   }
 
   gettoken(){  

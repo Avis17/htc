@@ -11,21 +11,30 @@ export class UserService {
   url = 'https://hi-techcity.onrender.com/api/web/'
 
 
-  getUsers(){
-    return this.http.post(this.url+'getusers', {collectionName :'members', reqdata : {}});
+  getUsers(collectionName:any,query:any){
+    return this.http.post(this.url+'getusers', {collectionName :collectionName, query : query});
   }
 
-  updateUser(userDetails:any){
+  updateUser(collectionName:any, userDetails:any){
     let _id = userDetails._id;
     delete userDetails._id;
-    return this.http.post(this.url+'update-user', {collectionName :'members', data : userDetails, query : _id});
+    return this.http.post(this.url+'update-user', {collectionName :collectionName, data : userDetails, query : _id});
   }
 
-  deleteUser(user:any){
+  deleteUser(collectionName : any, user:any){
     let _id = user._id;
-    return this.http.post(this.url+'delete-user', {collectionName :'members', query : _id});
+    return this.http.post(this.url+'delete-user', {collectionName :collectionName, query : _id});
   }
 
+  addData(data:any)
+  {
+    return this.http.post(this.url+'register', {
+      collectionName : 'complaints',
+      reqdata : {
+        ...data
+      }
+    })
+  }
 }
 
 

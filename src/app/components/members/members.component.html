@@ -1,21 +1,33 @@
-<div class="container mt-5">
+<div class="mt-5">
     <div class="end">
-        <input [(ngModel)]="searchText" type="text" class="form-control" placeholder="search here..">
+        <input [(ngModel)]="searchText" type="text" class="form-control width-60" placeholder="search here..">
     </div>
     <div class="table-responsive mt-5">
         <table class="table">
             <thead>
                 <tr>
                     <!-- <th>S No</th> -->
-                    <th>Flat No</th>
+                    <th>
+                        <label class="col">Flat No</label>
+                        <mat-icon (click)="onClickSort('flatNo')" class="col pointer">import_export</mat-icon>   
+                    </th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Gender</th>
+                    <th>
+                        <label class="col">Gender</label>
+                        <mat-icon (click)="onClickSort('gender')" class="col pointer">import_export</mat-icon>
+                    </th>
                     <th>Phone</th>
                     <th>Alternate Phone Number</th>
                     <th>Blood Group</th>
-                    <th>Type Of Flat</th>
-                    <th>Use</th>
+                    <th>
+                        <label class="col">Type Of Flat</label>
+                        <mat-icon (click)="onClickSort('typeOfFlat')" class="col pointer">import_export</mat-icon>
+                    </th>
+                    <th>
+                        <label class="col">Purpose</label>
+                        <mat-icon (click)="onClickSort('typeOfUse')" class="col pointer">import_export</mat-icon>   
+                    </th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -79,11 +91,15 @@
                             <input  [(ngModel)]="user.typeOfUse" type="radio" value="rental" name="use"> Rental
                         </div>    
                     </td>
-                    <td *ngIf="adminAccess">
-                        <button *ngIf="!user.isEdit" class="btn btn-warning" (click)="onEdit(user)">Edit</button>
-                        <button *ngIf="!user.isEdit" class="btn btn-danger" (click)="onDelete(user)">Delete</button>
-                        <button *ngIf="user.isEdit" class="btn btn-info" (click)="onCancel(user)">Cancel</button>
-                        <button *ngIf="user.isEdit" class="btn btn-success" (click)="onSave(user)">Save</button>
+                    <td *ngIf="adminAccess == 'admin' || adminAccess == 'sadmin'">
+                        <div class="row" style="width: 200px;">
+                            <button *ngIf="!user.isEdit" class="my-2 mx-2 col btn btn-warning" (click)="onEdit(user)">Edit</button>
+                             <button *ngIf="!user.isEdit" class="my-2 col btn btn-danger" (click)="onDelete(user)">Delete</button>
+                        </div>
+                        <div class="row" style="width: 200px;">
+                            <button *ngIf="user.isEdit" class="my-2 mx-2 col btn btn-info" (click)="onCancel(user)">Cancel</button>
+                            <button *ngIf="user.isEdit" class="my-2 btn  col btn-success" (click)="onSave(user)">Save</button>    
+                        </div>
                     </td>
                 </tr>
             </tbody>

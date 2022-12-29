@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { ComplaintsComponent } from './components/complaints/complaints.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { MembersComponent } from './components/members/members.component';
@@ -36,9 +37,13 @@ const routes: Routes = [
         component : MembersComponent
       },
       {
-        path : 'profile',
+        path : 'profile/:email',
         component : ProfileComponent
-      }
+      },
+      {
+        path : 'complaints',
+        component : ComplaintsComponent
+      },
     ]
   },
   
