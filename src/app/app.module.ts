@@ -21,6 +21,15 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
 import { ComplaintsComponent } from './components/complaints/complaints.component';
+import { TenantsComponent } from './components/tenants/tenants.component';
+import { MeetingNotesComponent } from './components/meeting-notes/meeting-notes.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatFormFieldModule } from '@angular/material/form-field';
+import {MatNativeDateModule} from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import {MatListModule} from '@angular/material/list';
+import { MinutesOfMeetingComponent } from './components/minutes-of-meeting/minutes-of-meeting.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +43,10 @@ import { ComplaintsComponent } from './components/complaints/complaints.componen
     SidebarComponent,
     ToolbarComponent,
     SearchPipe,
-    ComplaintsComponent
+    ComplaintsComponent,
+    TenantsComponent,
+    MeetingNotesComponent,
+    MinutesOfMeetingComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +58,12 @@ import { ComplaintsComponent } from './components/complaints/complaints.componen
     HttpClientModule,
     NgxPaginationModule,
     MatExpansionModule,
-    MatIconModule
+    MatIconModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatInputModule ,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
