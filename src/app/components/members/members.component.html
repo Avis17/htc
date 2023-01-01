@@ -4,6 +4,7 @@
     </div>
     <div class="table-responsive mt-5">
         <table class="table">
+            <caption>List of Members</caption>
             <thead>
                 <tr>
                     <!-- <th>S No</th> -->
@@ -28,11 +29,15 @@
                         <label class="col">Purpose</label>
                         <mat-icon (click)="onClickSort('typeOfUse')" class="col pointer">import_export</mat-icon>   
                     </th>
+                    <th>
+                        <label class="col">Rented To</label>
+                        <mat-icon (click)="onClickSort('rentalType')" class="col pointer">import_export</mat-icon>   
+                    </th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let user Of users | search : searchText : ['flatNo', 'name', 'email', 'phone', 'alternatePhone', 'bloodGroup', 'typeOfFlat', 'typeOfUse'] | paginate: { itemsPerPage: 5, currentPage: p}; let i=index">
+                <tr *ngFor="let user Of users | search : searchText : ['flatNo', 'name', 'email', 'phone', 'alternatePhone', 'bloodGroup', 'typeOfFlat', 'typeOfUse'] | paginate: { itemsPerPage: 10, currentPage: p}; let i=index">
                     <!-- <td>{{i+1}}</td> -->
                     <td>
                         <label *ngIf="!user.isEdit">{{user.flatNo}}</label>
@@ -89,6 +94,14 @@
                         <div *ngIf="user.isEdit">
                             <input  [(ngModel)]="user.typeOfUse" type="radio" value="own" name="use"> Own Use &nbsp;
                             <input  [(ngModel)]="user.typeOfUse" type="radio" value="rental" name="use"> Rental
+                        </div>    
+                    </td>
+                    <td>
+                        <label *ngIf="!user.isEdit && user.typeOfUse == 'rental'">{{user.rentalType}}</label>
+                        <div *ngIf="user.isEdit && user.typeOfUse == 'rental'">
+                            <input  [(ngModel)]="user.rentalType" type="radio" value="Bachelor" name="rentedto"> Bachelor &nbsp;
+                            <input  [(ngModel)]="user.rentalType" type="radio" value="Family" name="rentedto"> Family &nbsp;
+                            <input  [(ngModel)]="user.rentalType" type="radio" value="Vacant" name="rentedto"> Vacant
                         </div>    
                     </td>
                     <td *ngIf="adminAccess == 'admin' || adminAccess == 'sadmin'">

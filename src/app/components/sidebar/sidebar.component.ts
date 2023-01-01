@@ -16,7 +16,9 @@ export class SidebarComponent implements OnInit {
       this.isToggle = res;
     });
     this.userDetails = JSON.parse(sessionStorage.getItem('user') || '');
+    this.username = this.userDetails.email.split("@")[0]
   }
 
   userDetails : any;
+  username : any = ''
 }

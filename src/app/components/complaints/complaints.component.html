@@ -1,5 +1,6 @@
 
 <div>
+    <span>Raise Complaints and Service Requests.</span>
     <div class="text-end mb-3">
         <button class="btn btn-info" data-toggle="modal" data-target="#exampleModal">Raise Complaint</button>
     </div>
@@ -9,11 +10,12 @@
         </div>
         <div class="table-responsive">
             <table class="table">
+                <caption>List of Complaints/Services History</caption>
                 <thead>
                     <tr>
                         <th>S No</th>
-                        <th>Complaint Title</th>
-                        <th>Complaint</th>
+                        <th>Complaint/Service Title</th>
+                        <th>Description</th>
                         <th>Raised By</th>
                         <th>
                             <label>Flat No</label>
@@ -47,18 +49,18 @@
                             <td>{{complaint.contactNo}}</td>
                             <td>{{complaint.email}}</td>
                             <td>
-                                <button *ngIf="!complaint.isEdit" [ngClass]="{'btn btn-danger': complaint.status == 'Pending', 'btn btn-success': complaint.status == 'Completed', 'btn btn-warning':complaint.status == 'Working'}">{{complaint.status}}</button>
+                                <button *ngIf="!complaint.isEdit" [ngClass]="{'btn btn-danger': complaint.status == 'Pending', 'btn btn-success': complaint.status == 'Resolved', 'btn btn-warning':complaint.status == 'Work in Progress'}">{{complaint.status}}</button>
                                 <select style="width: 180px" [(ngModel)]="complaint.status" *ngIf="complaint.isEdit" class="form-control">
                                     <option>Pending</option>
-                                    <option>Working</option>
-                                    <option>Completed</option>
+                                    <option>Work in Progress</option>
+                                    <option>Resolved</option>
                                 </select>
                             </td>
                             <td>
                                 <label  *ngIf="!complaint.isEdit">{{complaint.remarks}}</label>
-                                <input style="width: 150px"  *ngIf="complaint.isEdit" [(ngModel)]="complaint.remarks" type="text" class="form-control" placeholder="enter remorks">
+                                <textarea style="width: 150px"  *ngIf="complaint.isEdit" [(ngModel)]="complaint.remarks" type="text" class="form-control" placeholder="enter remorks"></textarea>
                             </td>
-                            <td *ngIf="adminAccess == 'admin' || adminAccess == 'sadmin'">
+                            <td *ngIf="adminAccess == 'admin' || adminAccess == 'sadmin' || userDetails.email == complaint.email">
                                 <div class="row" style="width: 200px;">
                                     <button *ngIf="!complaint.isEdit" class="my-2 mx-2 col btn btn-info" (click)="complaint.isEdit = !complaint.isEdit">Edit</button>
                                      <button *ngIf="!complaint.isEdit && adminAccess == 'sadmin'" class="my-2 col btn btn-danger" (click)="onDelete(complaint)">Delete</button>

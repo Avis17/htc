@@ -26,10 +26,10 @@ export class UserService {
     return this.http.post(this.url+'delete-user', {collectionName :collectionName, query : _id});
   }
 
-  addData(data:any)
+  addData(collectionName:any,data:any)
   {
     return this.http.post(this.url+'register', {
-      collectionName : 'complaints',
+      collectionName : collectionName,
       reqdata : {
         ...data
       }

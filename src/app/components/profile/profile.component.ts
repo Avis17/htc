@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
       this.email = params['email'];
       if(this.email)
       {
-        this.getUserDetails(this.email)
+        this.getUserDetails(this.email+"@gmail.com")
       }
     });
     // this.userDetails = JSON.parse(sessionStorage.getItem('user') || '');
@@ -48,6 +48,7 @@ export class ProfileComponent implements OnInit {
         icon: 'success',
         text: 'User details updated successfully.'
       })
+      this.getUserDetails(this.email+"@gmail.com");
     })
   }
 
@@ -58,6 +59,7 @@ export class ProfileComponent implements OnInit {
       if(res.status == 200)
       {
         this.userDetails = res.data[0];
+        sessionStorage.setItem("user", JSON.stringify(this.userDetails));
       }
     })
   }

@@ -29,7 +29,6 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import {MatListModule} from '@angular/material/list';
-import { MinutesOfMeetingComponent } from './components/minutes-of-meeting/minutes-of-meeting.component';
 
 @NgModule({
   declarations: [
@@ -45,8 +44,7 @@ import { MinutesOfMeetingComponent } from './components/minutes-of-meeting/minut
     SearchPipe,
     ComplaintsComponent,
     TenantsComponent,
-    MeetingNotesComponent,
-    MinutesOfMeetingComponent
+    MeetingNotesComponent
   ],
   imports: [
     BrowserModule,

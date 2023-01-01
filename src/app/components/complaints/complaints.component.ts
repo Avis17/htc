@@ -28,7 +28,7 @@ export class ComplaintsComponent implements OnInit {
     complaint : ''
   }
   onClickComplaint(){
-    this.userService.addData({
+    this.userService.addData('complaints',{
       ...this.newComplaint,
       raisedBy : this.userDetails.name,
       raisedDate : new Date(),
@@ -66,11 +66,8 @@ export class ComplaintsComponent implements OnInit {
         return
       }
       console.log(res.data)
-      res.data.sort((a:any, b:any) => {
-        return a.raisedDate - b.raisedDate;
-      })
       this.complaintsList = res.data;
-
+      this.onClickSort('raisedDate')
     })
   }
   onPageChange(event: any) {

@@ -1,0 +1,149 @@
+
+<div>
+    <span class="error-color">1)PLEASE ADD ONE OF YOUR FLAT TENANT DETAILS MANDATORILY.</span><BR>
+    <span class="error-color">2)ADDING FUNCTION IS ENABLED FOR ONLY WHO IS RENTING OUT THE FLAT.</span>
+    <div class="text-end mb-3" *ngIf="isShow">
+        <button class="btn btn-info" data-toggle="modal" data-target="#exampleModal">Add Tenant</button>
+    </div>
+    <div class="mt-5">
+        <div class="text-end mb-5">
+            <input [(ngModel)]="searchText" type="text" class="form-control width-60" placeholder="search here..">
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <caption>List of Tenants Details</caption>
+                <thead>
+                    <tr>
+                        <th>S No</th>
+                        <th>
+                            <label>FlatNo</label>
+                            <mat-icon (click)="onClickSort('flatNo')" class="col pointer">import_export</mat-icon>   
+                        </th>
+                        <th>
+                            <label>Tenant type</label>
+                            <mat-icon (click)="onClickSort('tenantType')" class="col pointer">import_export</mat-icon>   
+                        </th>
+                        <th>Tenant Name</th>
+                        <th>Tenant Email</th>
+                        <th>
+                            <label>Tenant Phone</label>
+                        </th>
+                        <th>
+                            <label>Tenant Aadhar No</label>
+                        </th>
+                        <th>No Of persons in the flat</th>
+                        <th>Tenant Accupied Date</th>
+                        
+                        <th>Owner Name</th>
+                        <th>Owner Phone</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <ng-template *ngIf="complaintsList.length > 0"> -->
+                        <tr *ngFor="let tenant of tenantsList | search : searchText : ['flatNo', 'email', 'phone', 'tenantName', 'tenantEmail', 'tenantPhone', 'noOfTenantsInTheFlat', 'accupiedDate', 'tenantAadharNo'] | paginate: { itemsPerPage: 5, currentPage: p}; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{tenant.flatNo}}</td>
+                            <td>{{tenant.rentalType}}</td>
+                            <td>
+                                <span *ngIf="!tenant.isEdit">{{tenant.tenantName}}</span>
+                                <input style="width: 150px;" *ngIf="tenant.isEdit" [(ngModel)]="tenant.tenantName" type="text" class="mt-3 form-control" placeholder="Tenant Name">
+                            </td>
+                            <td>
+                                <span *ngIf="!tenant.isEdit">{{tenant.tenantEmail}}</span>
+                                <input style="width: 150px;" *ngIf="tenant.isEdit" type="email" [(ngModel)]="tenant.tenantEmail" class="mt-3 form-control" placeholder="Tenant Email">
+                            </td>
+                            <td>
+                                <span *ngIf="!tenant.isEdit">{{tenant.tenantPhone}}</span>
+                                <input style="width: 150px;" *ngIf="tenant.isEdit" [(ngModel)]="tenant.tenantPhone" type="number" class="mt-3 form-control" placeholder="Tenant Phone">
+                            </td>
+                            <td>
+                                <span *ngIf="!tenant.isEdit">{{tenant.tenantAadharNo}}</span>
+                                <input style="width: 150px;" *ngIf="tenant.isEdit" [(ngModel)]="tenant.tenantAadharNo" type="number" class="mt-3 form-control" placeholder="Tenant Aadhar No">
+                            </td>
+                            <td>
+                                <span *ngIf="!tenant.isEdit">
+                                    {{tenant.noOfTenantsInTheFlat}}
+                                </span>
+                                <input style="width: 150px;" *ngIf="tenant.isEdit" [(ngModel)]="tenant.noOfTenantsInTheFlat" type="number" class="mt-3 form-control" placeholder="No of Persons in the flat">
+                            </td>
+                            <td>
+                                <span *ngIf="!tenant.isEdit">{{tenant.accupiedDate}}</span>
+                                <input style="width: 150px;" *ngIf="tenant.isEdit" [(ngModel)]="tenant.accupiedDate" type="date" class="mt-3 form-control" placeholder="Tenant Accupied Date">
+                            </td>
+                            <td>{{tenant.name}}</td>
+                            <td>{{tenant.phone}}</td>
+                            <td>
+                                <div class="row" style="width: 200px;">
+                                    <button *ngIf="(adminAccess == 'admin' || adminAccess == 'sadmin' || userDetails.email == tenant.email) && !tenant.isEdit"  class="my-2 mx-2 col btn btn-info" (click)="tenant.isEdit = !tenant.isEdit">Edit</button>
+                                     <button *ngIf="!tenant.isEdit && adminAccess == 'sadmin'" class="my-2 col btn btn-danger" (click)="onDelete(tenant)">Delete</button>
+                                </div>
+                                <div class="row" style="width: 200px;">
+                                    <button *ngIf="tenant.isEdit" class="my-2 mx-2 col btn btn-info" (click)="tenant.isEdit = !tenant.isEdit">Cancel</button>
+                                    <button *ngIf="tenant.isEdit" class="my-2 col btn btn-success" (click)="onSave(tenant)">Save</button>    
+                                </div>
+                            </td> 
+                        </tr>
+                    <!-- </ng-template> -->
+                    <tr class="text-centre" *ngIf="tenantsList.length == 0">
+                       <td colspan="12"> No Tenants!</td> 
+                    </tr>
+                </tbody>
+            </table>
+            <div style="float: right;" *ngIf="tenantsList.length > 0">
+                <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title text-primary" id="exampleModalLabel">Add a Tenant</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+                <div class="col">
+                    <input [(ngModel)]="newTenant.tenantName" type="text" class="mt-3 form-control" placeholder="Tenant Name">
+                </div>
+          </div>
+          <div class="row">
+            <div class="col">
+                <input type="email" [(ngModel)]="newTenant.tenantEmail" class="mt-3 form-control" placeholder="Tenant Email">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+                <input [(ngModel)]="newTenant.tenantPhone" type="number" class="mt-3 form-control" placeholder="Tenant Phone">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input [(ngModel)]="newTenant.tenantAadharNo" type="number" class="mt-3 form-control" placeholder="Tenant Aadhar No">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input [(ngModel)]="newTenant.noOfTenantsInTheFlat" type="number" class="mt-3 form-control" placeholder="No of Persons in the flat">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input [(ngModel)]="newTenant.accupiedDate" type="date" class="mt-3 form-control" placeholder="Tenant Accupied Date">
+            </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" (click)="onClickTenant()" data-dismiss="modal" [disabled]="validateTenant()" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,93 @@
+<div class="container mt-5">
+    <div class="text-end mb-3" *ngIf="adminAccess == 'admin' || adminAccess == 'sadmin'">
+        <button class="btn btn-info" data-toggle="modal" data-target="#exampleModal">Add Meeting</button>
+    </div>
+    <div class="mt-5">
+        <div class="text-end mb-5">
+            <input [(ngModel)]="searchText" type="text" class="form-control width-60" placeholder="search here..">
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <caption>List of Meetings</caption>
+                <thead>
+                    <tr>
+                        <th>S No</th>
+                        <th>Meeting Held On</th>
+                        <th>Meeting Organiser</th>
+                        <th>Minutes of Meeting</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <ng-template *ngIf="complaintsList.length > 0"> -->
+                        <tr *ngFor="let meeting of meetingList | search : searchText : ['date', 'organisedBy'] | paginate: { itemsPerPage: 5, currentPage: p}; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{meeting.date | date}}</td>
+                            <td>{{meeting.organisedBy}}</td> 
+                            <td>
+                                <img (click)="navigateComponent(meeting.date)" class="pointer" src="../../../assets/icons/meeting-1.png">
+                            </td>
+                            <td>
+                                <button *ngIf="adminAccess == 'sadmin'" class="my-2 col btn btn-danger" (click)="onDelete(meeting)">Delete</button>
+                            </td>
+                        </tr>
+                    <!-- </ng-template> -->
+                    <tr class="text-centre" *ngIf="meetingList.length == 0">
+                       <td colspan="12"> No Meeting History found!</td> 
+                    </tr>
+                </tbody>
+            </table>
+            <div style="float: right;" *ngIf="meetingList.length > 0">
+                <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-primary" id="exampleModalLabel">Create a New Meeting</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <div>
+                            <mat-form-field appearance="fill" class="example-form-field" style="width: 100%;">
+                                <mat-label>Choose a date</mat-label>
+                                <input matInput [matDatepicker]="datepicker" [(ngModel)]="newMeeting.date">
+                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                                <mat-datepicker #datepicker>
+                                    <mat-datepicker-actions>
+                                        <button mat-button matDatepickerCancel>Cancel</button>
+                                        <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                                    </mat-datepicker-actions>
+                                </mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <select class="form-control" [(ngModel)]="newMeeting.organisedBy">
+                            <option selected value="Select an Organiser" disabled>Select an Organiser</option>
+                            <option *ngFor="let user of users" [value]="user.name">{{user.name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" (click)="onClickMeeting()" data-dismiss="modal" [disabled]="validateMeeting()"
+                    class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

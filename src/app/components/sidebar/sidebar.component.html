@@ -23,7 +23,7 @@
     <hr class="sidebar-divider">
 
     <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" [routerLink]="[ '/dashboard/profile/', userDetails.email]">
+        <a class="nav-link" routerLinkActive="active" [routerLink]="[ '/dashboard/profile/', username]">
             <img src="../../../assets/icons/profile.png" width="24px"> &nbsp;
             <span>Profile</span></a>
     </li>
@@ -37,6 +37,22 @@
             <span>Complaints</span></a>
     </li>
     <!-- Divider -->
+    <hr class="sidebar-divider">
+
+     <li class="nav-item">
+         <a class="nav-link" routerLinkActive="active" routerLink="/dashboard/tenants">
+             <img src="../../../assets/icons/tenant.png" width="24px"> &nbsp;
+             <span>Tenants</span></a>
+     </li>
+
+     <hr class="sidebar-divider">
+
+     <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" routerLink="/dashboard/meeting-notes">
+            <img src="../../../assets/icons/meeting.png" width="24px"> &nbsp;
+            <span>Meeting Notes</span></a>
+    </li>
+
     <hr class="sidebar-divider">
 </ul>
 <!-- End of Sidebar -->

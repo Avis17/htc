@@ -101,7 +101,7 @@
                 </div>
               </div>
             <div class="row mt-2">
-                <div class="col">
+                <div class="col-6">
                     <h3>Type Of Flat</h3>
                     <label *ngIf="!isEdit">{{userDetails.typeOfFlat}}</label>
                     <div *ngIf="isEdit">
@@ -109,13 +109,22 @@
                       <input [(ngModel)]="userDetails.typeOfFlat" type="radio" value="2bhk" name="flat"> 2 BHK
                     </div>
                   </div>
-                <div class="col">
+                <div class="col-6">
                     <h3>Use of Flat</h3>
                     <label *ngIf="!isEdit">{{userDetails.typeOfUse}}</label>
                       <div *ngIf="isEdit">
                           <input [(ngModel)]="userDetails.typeOfUse" type="radio" value="own" name="use"> Own Use &nbsp;
                           <input [(ngModel)]="userDetails.typeOfUse" type="radio" value="rental" name="use"> Rental
                       </div>
+                  </div>
+                  <div class="mt-3 col-6" *ngIf="userDetails.typeOfUse == 'rental'">
+                    <h3>Rented To</h3>
+                    <label *ngIf="!isEdit">{{userDetails.rentalType}}</label>
+                      <div *ngIf="isEdit">
+                          <input [(ngModel)]="userDetails.rentalType" type="radio" value="Bachelor" name="rentedto"> Bachelor &nbsp;
+                          <input [(ngModel)]="userDetails.rentalType" type="radio" value="Family" name="rentedto"> Family &nbsp;
+                          <input  [(ngModel)]="userDetails.rentalType" type="radio" value="Vacant" name="rentedto"> Vacant
+                        </div>
                   </div>
             </div>
           </mat-expansion-panel>

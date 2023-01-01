@@ -1,0 +1,35 @@
+.example-form-field {
+    margin-right: 20px;
+  }
+
+::ng-deep .cdk-overlay-container{
+    z-index:1200 !important;
+}
+  .text-end{
+    display: flex;
+    justify-content: flex-end;
+}
+.text-centre{
+    text-align: center;
+}
+
+::ng-deep .mat-hint{
+    display: none !important;
+} 
+
+.pointer{
+    cursor: pointer;
+}
+
+textarea{
+    color: gray;
+    width: 250px;
+}
+
+.width-60{
+    width: 60%;
+}
+
+.error-color{
+    color: red;
+}

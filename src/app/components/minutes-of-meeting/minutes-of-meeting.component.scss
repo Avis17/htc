@@ -1,0 +1,28 @@
+
+.bg{
+    background-color: cornflowerblue;
+    color: white;
+    padding: 15px;
+}
+
+.split{
+    display: flex;
+    justify-content: space-between;
+}
+
+h3{
+    font-weight:500 ;
+}
+
+.box{
+    background: lavender;
+    font-weight: 500;
+    padding: 10px;
+    border: 1px solid steelblue;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+img{
+    cursor: pointer;
+}
